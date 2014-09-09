@@ -3,7 +3,6 @@
  */
 $(function () {
 
-
     var svgDocument = $('#svgbaum');
 
     svgDocument.bind('percent', function (event) {
@@ -24,9 +23,11 @@ $(function () {
                 y = Math.floor((Math.random() * 220) + 1);
             }
 
+            var color = Math.floor((Math.random() * 100) + 1)
+
             var bigCircle = s.circle(x, y, 12);
             bigCircle.attr({
-                fill: "#006c00",
+                fill: (color > (100 - percent)) ? "#006c00" : "#bada55",
                 stroke: "#000000"
             })
         }
@@ -36,9 +37,8 @@ $(function () {
 
     svgDocument.trigger({
         type: 'percent',
-        percent: 68
+        percent: 100
     })
 
     console.info('Hallo, hier bin ich :)');
-})
-;
+});
