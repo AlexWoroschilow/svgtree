@@ -14,7 +14,7 @@ $(function () {
         // get svg block by id='svgbaum'
         var s = Snap("#svgbaum");
 
-        
+
         for (var i = 0; i < (percent / 1.5); i++) {
 
             var x = 0;
