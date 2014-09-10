@@ -16,6 +16,9 @@
 
         fields: function (percent) {
 
+            // Fetch all fields in baum
+            // if fields exists remove all old fields
+            // to draw a new with new percent count
             var fields = this.snap.selectAll('circle[class=field]');
             if (typeof(fields) != 'null') {
                 fields.forEach(function (element) {
@@ -23,7 +26,7 @@
                 });
             }
 
-            for (var i = 0; i < (percent / 2); i++) {
+            for (var i = 0; i < (percent / 1.5); i++) {
 
                 var x = 0;
                 // get x-coordinate [50, 370]
@@ -85,13 +88,12 @@
 
 
     $.fn.tree = function (selector) {
-
-        var tree = $(this).data('tree');
+        var $element = $(this);
+        var tree = $element.data('tree');
         if (typeof(tree) == 'undefined') {
             tree = new Tree(selector);
-            $(this).data('tree', tree);
+            $element.data('tree', tree);
         }
-
         return tree;
     };
 
@@ -116,7 +118,7 @@ $(function () {
     // hier wird die Anzahl der Procente uebergeben
     svgDocument.trigger({
         type: 'percent',
-        percent: 100
+        percent: 68
     })
 
     console.info('Hallo, hier bin ich :)');
