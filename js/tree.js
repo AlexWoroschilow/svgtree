@@ -13,6 +13,10 @@
 
         snap: undefined,
 
+        init: function (selector) {
+            this.snap = Snap(selector);
+        },
+
         fields: function (percent) {
 
             // Fetch all fields in baum
@@ -76,46 +80,34 @@
 
 
             }
-        },
-
-        init: function (selector) {
-
-            // get svg block by id='svgbaum'
-            this.snap = Snap(selector);
         }
     })
 
 
     $.fn.tree = function (selector) {
-        var $element = $(this);
-        var tree = $element.data('tree');
+        var container = $(this);
+        var tree = container.data('tree');
         if (typeof(tree) == 'undefined') {
             tree = new Tree(selector);
-            $element.data('tree', tree);
+            container.data('tree', tree);
         }
         return tree;
     };
+
+    var container = $(document);
+    container.bind('percent', function (event) {
+        container.tree(event.selector)
+            .fields(event.percent);
+    });
 
 })($);
 
 
 $(function () {
 
-    var container = $(document);
-
-    container.bind('percent', function (event) {
-        // Store percent value
-        // into local variable
-        container
-            .tree('#svgbaum')
-            .fields(event.percent);
-    });
-
-
-    // hier wird die Anzahl
-    // der Procente uebergeben
-    container.trigger({
+    $(document).trigger({
         type: 'percent',
+        selector: '#svgbaum',
         percent: 68
     })
 
