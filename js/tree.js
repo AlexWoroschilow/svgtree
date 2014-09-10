@@ -9,7 +9,6 @@
         this.init(selector);
     }
 
-
     $.extend(Tree.prototype, {
 
         snap: undefined,
@@ -73,7 +72,7 @@
                         fill: color,
                         class: 'field',
                         stroke: "#000000"
-                    })
+                    });
 
 
             }
@@ -102,21 +101,20 @@
 
 $(function () {
 
-    var svgDocument = $('#svgbaum');
+    var container = $(document);
 
-    var svgTree = $(document)
-        .tree("#svgbaum");
-
-
-    svgDocument.bind('percent', function (event) {
+    container.bind('percent', function (event) {
         // Store percent value
         // into local variable
-        svgTree.fields(event.percent);
+        container
+            .tree('#svgbaum')
+            .fields(event.percent);
     });
 
 
-    // hier wird die Anzahl der Procente uebergeben
-    svgDocument.trigger({
+    // hier wird die Anzahl
+    // der Procente uebergeben
+    container.trigger({
         type: 'percent',
         percent: 68
     })
